@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>States</title>
-    <link rel="stylesheet" href="style.scss" />
-  </head>
-  <body>
-    <form class="ui-form" data-state="subscribe">
-      <input class="ui-input" type="email" placeholder="your@email.com" />
-      <button class="ui-button" type="button" onclick="setState('subscribing')">
-        <span>Subscribe</span>
-        <span>Subscribing</span>
-        <span>Success!</span>
-        <span>Error</span>
-      </button>
-    </form>
-  </body>
-  <script>
-    const form = document.querySelector('.ui-form');
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>States</title>
+  <link rel="stylesheet" href="style.scss" />
+</head>
+
+<body>
+  <form class="ui-form" data-state="subscribe">
+    <input class="ui-input" type="email" placeholder="your@email.com" />
+    <button class="ui-button" type="button">
+      <span>Subscribe</span>
+    </button>
+  </form>
+</body>
+<script>
+  const form = document.querySelector('.ui-form');
+  const inputEl = document.querySelector('.ui-input');
+  const spanEl = document.querySelector('span');
+  const buttonEl = document.querySelector('.ui-button')
+  buttonEl.addEventListener('click', () => {
+    form.dataset.state = 'Subscribing';
+    spanEl.innerText = 'Subscribing!'
+    setTimeout(() => {
+      if (!inputEl.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+        form.dataset.state = 'error';
+        spanEl.innerText = 'Error!';
+      } else {
+        form.dataset.state = 'success';
+        spanEl.innerText = 'Success!';
+      }
+    }, 1000);
+  })
     // ...
-  </script>
+</script>
+
 </html>

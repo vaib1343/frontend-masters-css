@@ -1,31 +1,74 @@
 @import './styles/base.scss';
 
+:root {
+    --duratoin: 0.5s;
+    --easing: cubic-bezier(0.5, 0, 0.5, 1);
+}
+
 body {
-  font-family: 'Open Sans', sans-serif;
-  padding: 5vmin;
-  background-color: #f4f4f4;
+    font-family: 'Open Sans', sans-serif;
+    padding: 5vmin;
+    background-color: #f4f4f4;
+    color: var(--color);
 }
 
 a {
-  color: blue;
+    color: blue;
 }
 
 h1 {
-  margin: 0;
+    margin: 0;
 }
 
 small {
-  text-transform: uppercase;
-  font-weight: bold;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#app {
+    --bg: orange;
+    &[data-state='loading'] {
+        background-color: var(--bg);
+    }
 }
 
 ul {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 
 .ball {
-  height: 5vmin;
-  width: 5vmin;
-  border-radius: 50%;
-  background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+    --duration: 1s;
+    --stagger: 0.5s;
+    --interval: calc(var(--duration) - var(--stagger));
+    height: 5vmin;
+    width: 5vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+    animation-name: move-right;
+    animation-duration: var(--duration);
+    animation-delay:  calc(var(--interval) * var(--i));
+    animation-fill-mode: both;
+}
+@keyframes square-move {
+    0% {
+        transform: none;
+    }
+    25% {
+        transform: translateX(20vw);
+    }
+    50% {
+        transform: translate(20vw, 20vw);
+    }
+    75% {
+        transform: translate(0, 20vw);
+    }
+}
+
+@keyframes move-right {
+    from {
+        transform: none;
+    }
+    to {
+        transform: translateX(25vw);
+    }
 }
